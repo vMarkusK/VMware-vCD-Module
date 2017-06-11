@@ -3,7 +3,7 @@ Welcome to my VMware-vCD-Module Module
 
 This the basic documentation of the 'VMware-vCD-Module' PowerShell Module.
 
-GutHub: https://github.com/mycloudrevolution/VMware-vCD-Module
+GitHub: https://github.com/mycloudrevolution/VMware-vCD-Module
 
 WebSite: https://mycloudrevolution.com/
 
