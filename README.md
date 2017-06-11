@@ -20,7 +20,7 @@ Markus Kraus [@vMarkus_K](https://twitter.com/vMarkus_K)
 
 ## Project Documentation:
 
-[Read the Docs](http://readthedocs.io/)
+[Read the Docs](http://vmware-vcd-module.readthedocs.io/)
 
 ## Project Description:
 
