@@ -1,15 +1,9 @@
-<a name="Title">
-#Title
-
 VMware-vCD-Module PowerShell Module
+===================================
 
-|Navigation|
-|-----------------|
-|[About](#About)|
+![Invoke-MyOnBoarding](/media/Invoke-MyOnBoarding.png)
 
-<a name="About">
-#About
-[*Back to top*](#Title)
+# About
 
 ## Project Owner:
 
