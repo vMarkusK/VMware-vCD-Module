@@ -1,0 +1,6 @@
+# Set default behaviour, in case users don't have core.autocrlf set.
+* text=auto
+
+# Ignore in exports
+.gitAttributes export-ignore
+.gitIgnore export-ignore
