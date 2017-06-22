@@ -67,7 +67,7 @@ Function New-MyOrgVdc {
     Org where the new Org VDC should be created as string
 
 .PARAMETER Timeout
-    Timeout for teh Org VDC to get Ready
+    Timeout for the Org VDC to get Ready
 
     Default: 120s
 
@@ -103,7 +103,7 @@ Function New-MyOrgVdc {
         [Parameter(Mandatory=$True, ValueFromPipeline=$False, HelpMessage="Org where the new Org VDC should be created as string")]
         [ValidateNotNullorEmpty()]
             [String] $Org,
-        [Parameter(Mandatory=$False, ValueFromPipeline=$False,HelpMessage="Timeout for teh Org VDC to get Ready")]
+        [Parameter(Mandatory=$False, ValueFromPipeline=$False,HelpMessage="Timeout for the Org VDC to get Ready")]
         [ValidateNotNullorEmpty()]
             [int] $Timeout = 120
     )
