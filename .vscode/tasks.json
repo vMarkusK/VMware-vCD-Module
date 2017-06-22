@@ -29,7 +29,7 @@
 	"showOutput": "always",
 
     "args": [
-        "-NoProfile", "-ExecutionPolicy", "Bypass"
+        "-NoProfile","-ExecutionPolicy", "Bypass"
     ],
 
     // Associate with test task runner
@@ -83,7 +83,7 @@
             "isTestCommand": true,
             "showOutput": "always",
             "args": [
-                "Write-Host 'Invoking Pester'; Invoke-Pester -PesterOption @{IncludeVSCodeMarker=$true};",
+                "Write-Host 'Invoking Pester'; Import-Module Pester -force; Invoke-Pester -PesterOption @{IncludeVSCodeMarker=$true};",
                 "Invoke-Command { Write-Host 'Completed Test task in task runner.' }"
             ],
             "problemMatcher": [
