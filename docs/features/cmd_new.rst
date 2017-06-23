@@ -3,9 +3,89 @@
 
 This page contains details on **New** commands.
 
-New-MyOrg
+New-MyEdgeGateway
 -------------------------
 
+
+NAME
+    New-MyEdgeGateway
+    
+SYNOPSIS
+    Creates a new Edge Gateway with Default Parameters
+    
+    
+SYNTAX
+    New-MyEdgeGateway [-Name] <String> [-OrgVdcName] <String> [-OrgName] <String> [-ExternalNetwork] <String> [-IPAddress] <IPAddress> [-SubnetMask] <IPAddress> [-Gateway] <IPAddress> [-IPRangeStart] <IPAddress> [-IPRangeEnd] <IPAddress> [[-Timeout] 
+    <Int32>] [<CommonParameters>]
+    
+    
+DESCRIPTION
+    Creates a new Edge Gateway with Default Parameters
+    
+    Default Parameters are:
+    * Size 
+    * HA State
+    * DNS Relay
+    
+
+PARAMETERS
+    -Name <String>
+        Name of the New Edge Gateway as String
+        
+    -OrgVdcName <String>
+        OrgVDC where the new Edge Gateway should be created as string
+        
+    -OrgName <String>
+        Org where the new Edge Gateway should be created as string
+        
+    -ExternalNetwork <String>
+        External Network of the new Edge Gateway as String
+        
+    -IPAddress <IPAddress>
+        IP Address of the New Edge Gateway as IP Address
+        
+    -SubnetMask <IPAddress>
+        Subnet Mask of the New Edge Gateway as IP Address
+        
+    -Gateway <IPAddress>
+        Gateway of the New Edge Gateway as IP Address
+        
+    -IPRangeStart <IPAddress>
+        Sub Allocation IP Range Start of the New Edge Gateway as IP Address
+        
+    -IPRangeEnd <IPAddress>
+        Sub Allocation IP Range End of the New Edge Gateway as IP Address
+        
+    -Timeout <Int32>
+        Timeout for the Edge Gateway to get Ready
+        
+        Default: 120s
+        
+    <CommonParameters>
+        This cmdlet supports the common parameters: Verbose, Debug,
+        ErrorAction, ErrorVariable, WarningAction, WarningVariable,
+        OutBuffer, PipelineVariable, and OutVariable. For more information, see 
+        about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216). 
+    
+    -------------------------- EXAMPLE 1 --------------------------
+    
+    C:\PS>New-MyEdgeGateway -Name "TestEdge" -OrgVDCName "TestVDC" -OrgName "TestOrg" -ExternalNetwork "ExternalNetwork" -IPAddress "192.168.100.1" -SubnetMask "255.255.255.0" -Gateway "192.168.100.254" -IPRangeStart ""192.168.100.2" -IPRangeEnd 
+    ""192.168.100.3" -Verbose
+    
+    
+    
+    
+    
+    
+REMARKS
+    To see the examples, type: "get-help New-MyEdgeGateway -examples".
+    For more information, type: "get-help New-MyEdgeGateway -detailed".
+    For technical information, type: "get-help New-MyEdgeGateway -full".
+    For online help, type: "get-help New-MyEdgeGateway -online"
+
+
+New-MyOrg
+-------------------------
 
 NAME
     New-MyOrg
@@ -54,7 +134,7 @@ PARAMETERS
     
     -------------------------- EXAMPLE 1 --------------------------
     
-    PS C:\>New-MyOrg -Name "TestOrg" -FullName "Test Org" -Description "PowerCLI Test Org"
+    C:\PS>New-MyOrg -Name "TestOrg" -FullName "Test Org" -Description "PowerCLI Test Org"
     
     
     
@@ -117,7 +197,7 @@ PARAMETERS
     
     -------------------------- EXAMPLE 1 --------------------------
     
-    PS C:\>New-MyOrgAdmin -Name "OrgAdmin" -Pasword "Anfang!!" -FullName "Org Admin" -EmailAddress "OrgAdmin@TestOrg.local" -Org "TestOrg"
+    C:\PS>New-MyOrgAdmin -Name "OrgAdmin" -Pasword "Anfang!!" -FullName "Org Admin" -EmailAddress "OrgAdmin@TestOrg.local" -Org "TestOrg"
     
     
     
@@ -142,8 +222,8 @@ SYNOPSIS
     
     
 SYNTAX
-    New-MyOrgVdc [-Name] <String> [-CPULimit] <Int32> [-MEMLimit] <Int32> [-StorageLimit] <Int32> [-StorageProfile] <String> [-NetworkPool] <String> 
-    [[-ExternalNetwork] <String>] [-Enabled] [-ProviderVDC] <String> [-Org] <String> [[-Timeout] <Int32>] [<CommonParameters>]
+    New-MyOrgVdc [-Name] <String> [-CPULimit] <Int32> [-MEMLimit] <Int32> [-StorageLimit] <Int32> [-StorageProfile] <String> [-NetworkPool] <String> [[-ExternalNetwork] <String>] [-Enabled] [-ProviderVDC] <String> [-Org] <String> [[-Timeout] <Int32>] 
+    [<CommonParameters>]
     
     
 DESCRIPTION
@@ -195,7 +275,7 @@ PARAMETERS
         Org where the new Org VDC should be created as string
         
     -Timeout <Int32>
-        Timeout for teh Org VDC to get Ready
+        Timeout for the Org VDC to get Ready
         
         Default: 120s
         
@@ -207,8 +287,7 @@ PARAMETERS
     
     -------------------------- EXAMPLE 1 --------------------------
     
-    PS C:\>New-MyOrgVdc -Name "TestVdc" -CPULimit 1000 -MEMLimit 1000 -StorageLimit 1000 -StorageProfile "Standard-DC01" -NetworkPool 
-    "NetworkPool-DC01" -ProviderVDC "Provider-VDC-DC01" -Org "TestOrg" -ExternalNetwork "External_OrgVdcNet"
+    C:\PS>New-MyOrgVdc -Name "TestVdc" -CPULimit 1000 -MEMLimit 1000 -StorageLimit 1000 -StorageProfile "Standard-DC01" -NetworkPool "NetworkPool-DC01" -ProviderVDC "Provider-VDC-DC01" -Org "TestOrg" -ExternalNetwork "External_OrgVdcNet"
     
     
     
@@ -217,8 +296,7 @@ PARAMETERS
     
     -------------------------- EXAMPLE 2 --------------------------
     
-    PS C:\>New-MyOrgVdc -Name "TestVdc" -CPULimit 1000 -MEMLimit 1000 -StorageLimit 1000 -StorageProfile "Standard-DC01" -NetworkPool 
-    "NetworkPool-DC01" -ProviderVDC "Provider-VDC-DC01" -Org "TestOrg"
+    C:\PS>New-MyOrgVdc -Name "TestVdc" -CPULimit 1000 -MEMLimit 1000 -StorageLimit 1000 -StorageProfile "Standard-DC01" -NetworkPool "NetworkPool-DC01" -ProviderVDC "Provider-VDC-DC01" -Org "TestOrg"
     
     
     

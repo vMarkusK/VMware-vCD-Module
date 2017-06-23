@@ -18,6 +18,6 @@ Markus Kraus [@vMarkus_K](https://twitter.com/vMarkus_K)
 
 ## Project Description:
 
-The 'VMware-vCD-Module' PowerShell Module is focused on the initial craation of VMware vCloud Director Objects like Org, Org User, Org VDC.
+The 'VMware-vCD-Module' PowerShell Module is focused on the initial creation of VMware vCloud Director Objects like Org, Org User, Org VDC with External Networks or Edge Gateway.
 
 

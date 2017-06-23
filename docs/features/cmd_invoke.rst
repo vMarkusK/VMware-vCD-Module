@@ -51,7 +51,13 @@ DESCRIPTION
             "StorageProfile":"Standard-DC01",
             "ProviderVDC":"Provider-VDC-DC01",
             "NetworkPool":"Provider-VDC-DC01-NetPool",
-            "ExternalNetwork": "External_OrgVdcNet"
+            "ExternalNetwork": "External_OrgVdcNet",
+            "EdgeGateway": "Yes",
+            "IPAddress":"192.168.100.1",
+            "SubnetMask":"255.255.255.0",
+            "Gateway":"192.168.100.254",
+            "IPRangeStart":"192.168.100.2",
+            "IPRangeEnd":"192.168.100.3"
         }
     }
     
@@ -73,7 +79,7 @@ PARAMETERS
     
     -------------------------- EXAMPLE 1 --------------------------
     
-    PS C:\>Invoke-MyOnBoarding -ConfigFile ".\OnBoarding.json" -Enabled:$true
+    C:\PS>Invoke-MyOnBoarding -ConfigFile ".\OnBoarding.json" -Enabled:$true
     
     
     
@@ -82,7 +88,7 @@ PARAMETERS
     
     -------------------------- EXAMPLE 2 --------------------------
     
-    PS C:\>Invoke-MyOnBoarding -ConfigFile ".\OnBoarding.json" -Enabled:$false
+    C:\PS>Invoke-MyOnBoarding -ConfigFile ".\OnBoarding.json" -Enabled:$false
     
     
     
