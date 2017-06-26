@@ -2,33 +2,33 @@
 #Requires -Modules VMware.VimAutomation.Cloud, @{ModuleName="VMware.VimAutomation.Cloud";ModuleVersion="6.3.0.0"}
 Function New-MyEdgeGateway {
 <#
-.SYNOPSIS  
+.SYNOPSIS
     Creates a new Edge Gateway with Default Parameters
 
-.DESCRIPTION  
+.DESCRIPTION
     Creates a new Edge Gateway with Default Parameters
-    
+
     Default Parameters are:
-    * Size 
+    * Size
     * HA State
     * DNS Relay
 
-    
-.NOTES  
+
+.NOTES
     File Name  : New-MyEdgeGateway.ps1
     Author     : Markus Kraus
     Version    : 1.0
     State      : Ready
-    
-.LINK  
+
+.LINK
     https://mycloudrevolution.com/
 
-.EXAMPLE  
+.EXAMPLE
     New-MyEdgeGateway -Name "TestEdge" -OrgVDCName "TestVDC" -OrgName "TestOrg" -ExternalNetwork "ExternalNetwork" -IPAddress "192.168.100.1" -SubnetMask "255.255.255.0" -Gateway "192.168.100.254" -IPRangeStart ""192.168.100.2" -IPRangeEnd ""192.168.100.3" -Verbose
 
-.PARAMETER Name  
+.PARAMETER Name
     Name of the New Edge Gateway as String
-   
+
 .PARAMETER OrgVDCName
     OrgVDC where the new Edge Gateway should be created as string
 
@@ -57,7 +57,7 @@ Function New-MyEdgeGateway {
     Timeout for the Edge Gateway to get Ready
 
     Default: 120s
-       
+
 #>
     Param (
         [Parameter(Mandatory=$True, ValueFromPipeline=$False, HelpMessage="Name of the New Edge Gateway as String")]
@@ -101,11 +101,11 @@ Function New-MyEdgeGateway {
         throw "Multiple OrgVdcs found!"
         }
         elseif ( $orgVdc.Count -lt 1) {
-            throw "No OrgVdc found!" 
+            throw "No OrgVdc found!"
             }
     ## Get External Network
     Write-Verbose "Get External Network"
-    $extNetwork = Get-ExternalNetwork | Get-CIView -Verbose:$False | where {$_.name -eq $ExternalNetwork}
+    $extNetwork = Get-ExternalNetwork | Get-CIView -Verbose:$False | Where-Object {$_.name -eq $ExternalNetwork}
 
     ## Build EdgeGatway Configuration
     Write-Verbose "Build EdgeGatway Configuration"
@@ -119,8 +119,7 @@ Function New-MyEdgeGateway {
 
     $EdgeGateway.Configuration.EdgeGatewayServiceConfiguration = New-Object VMware.VimAutomation.Cloud.Views.GatewayFeatures
     $EdgeGateway.Configuration.GatewayInterfaces = New-Object VMware.VimAutomation.Cloud.Views.GatewayInterfaces
- 
- 
+
     $EdgeGateway.Configuration.GatewayInterfaces.GatewayInterface = New-Object VMware.VimAutomation.Cloud.Views.GatewayInterface
     $EdgeGateway.Configuration.GatewayInterfaces.GatewayInterface[0].name = $extNetwork.Name
     $EdgeGateway.Configuration.GatewayInterfaces.GatewayInterface[0].DisplayName = $extNetwork.Name
@@ -128,8 +127,7 @@ Function New-MyEdgeGateway {
     $EdgeGateway.Configuration.GatewayInterfaces.GatewayInterface[0].InterfaceType = "uplink"
     $EdgeGateway.Configuration.GatewayInterfaces.GatewayInterface[0].UseForDefaultRoute = $true
     $EdgeGateway.Configuration.GatewayInterfaces.GatewayInterface[0].ApplyRateLimit = $false
-    
-    ## Inputs müssen verändert werden
+
     $ExNetexternalSubnet = New-Object VMware.VimAutomation.Cloud.Views.SubnetParticipation
     $ExNetexternalSubnet.Gateway = $Gateway.IPAddressToString
     $ExNetexternalSubnet.Netmask = $SubnetMask.IPAddressToString
@@ -138,9 +136,9 @@ Function New-MyEdgeGateway {
     $ExNetexternalSubnet.IpRanges.IpRange = New-Object VMware.VimAutomation.Cloud.Views.IpRange
     $ExNetexternalSubnet.IpRanges.IpRange[0].StartAddress = $IPRangeStart.IPAddressToString
     $ExNetexternalSubnet.IpRanges.IpRange[0].EndAddress =   $IPRangeEnd.IPAddressToString
-    
+
     $EdgeGateway.Configuration.GatewayInterfaces.GatewayInterface[0].SubnetParticipation = $ExNetexternalSubnet
-    
+
     ## Create EdgeGatway
     Write-Verbose "Create EdgeGatway"
     $CreateEdgeGateway = $orgVdc.ExtensionData.CreateEdgeGateway($EdgeGateway)
@@ -156,8 +154,8 @@ Function New-MyEdgeGateway {
     Write-Progress -Activity "Creating Edge Gateway" -Completed
     Start-Sleep 1
 
-    Search-Cloud -QueryType EdgeGateway -Name $Name | Select Name, IsBusy, GatewayStatus, HaStatus | ft -AutoSize
+    Search-Cloud -QueryType EdgeGateway -Name $Name | Select-Object Name, IsBusy, GatewayStatus, HaStatus | Format-Table -AutoSize
 
 
     }
-} 
+}
