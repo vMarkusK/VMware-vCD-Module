@@ -1,5 +1,6 @@
 VMware-vCD-Module PowerShell Module
 ===================================
+[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=vMarkus_K&url=https://github.com/mycloudrevolution/VMware-vCD-Module&title=VMware-vCD-Module&language=Powershell&tags=github&category=software)
 
 ![Invoke-MyOnBoarding](/media/Invoke-MyOnBoarding.png)
 
