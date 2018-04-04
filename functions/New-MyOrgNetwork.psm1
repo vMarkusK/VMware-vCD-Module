@@ -3,15 +3,15 @@
 Function New-MyOrgNetwork {
     <#
     .SYNOPSIS
-        Creates a new Edge Gateway with Default Parameters
+        Creates a new Org Network with Default Parameters
 
     .DESCRIPTION
 
     .NOTES
         File Name  : New-MyOrgNetwork.ps1
         Author     : Markus Kraus
-        Version    : 0.1
-        State      : Dev
+        Version    : 1.0
+        State      : Test
 
     .LINK
         https://mycloudrevolution.com
@@ -92,8 +92,11 @@ Function New-MyOrgNetwork {
                 }
 
         $orgVdcView = $orgVdc| Get-CIView
+
+        ## Get EdgeGateway
         $edgeGateway = Search-Cloud -QueryType EdgeGateway -Name $EdgeName | Get-CIView
 
+        ## Define Org Network
         $OrgNetwork = new-object vmware.vimautomation.cloud.views.orgvdcnetwork
         $OrgNetwork.name = $Name
         $OrgNetwork.edgegateway = $edgeGateway.id
@@ -106,7 +109,7 @@ Function New-MyOrgNetwork {
         $Scope = new-object vmware.vimautomation.cloud.views.ipScope
         $Scope.gateway = $Gateway
         $Scope.netmask = $SubnetMask
-       # $Scope.dns1 = "192.168.2.1"
+       #$Scope.dns1 = "192.168.2.1"
 
         $Scope.ipranges = new-object vmware.vimautomation.cloud.views.ipranges
         $Scope.ipranges.iprange = new-object vmware.vimautomation.cloud.views.iprange
@@ -115,9 +118,10 @@ Function New-MyOrgNetwork {
 
         $OrgNetwork.configuration.ipscopes.ipscope += $Scope
 
+        ## Create Org Network
         $CreateOrgNetwork = $orgVdcView.CreateNetwork($OrgNetwork)
 
-        ## Wait for EdgeGatway to become Ready
+        ## Wait for Org Network to become Ready
         Write-Verbose "Wait for Org Network to become Ready"
         while(!(Get-OrgVdcNetwork -Id $CreateOrgNetwork.Id -ErrorAction SilentlyContinue)){
             $i++
