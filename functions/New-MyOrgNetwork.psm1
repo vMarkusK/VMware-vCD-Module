@@ -11,13 +11,13 @@ Function New-MyOrgNetwork {
         File Name  : New-MyOrgNetwork.ps1
         Author     : Markus Kraus
         Version    : 1.0
-        State      : Test
+        State      : Ready
 
     .LINK
         https://mycloudrevolution.com
 
     .EXAMPLE
-         New-MyOrgNetwork -Name Test -OrgVdcName "Test-OrgVDC" -OrgName "Test-Org" -EdgeName "Test-OrgEdge" -SubnetMask 255.255.255.0 -Gateway 192.168.66.1 -IPRangeStart 192.168.66.100 -IPRangeEnd 192.168.66.200
+        New-MyOrgNetwork -Name Test -OrgVdcName "Test-OrgVDC" -OrgName "Test-Org" -EdgeName "Test-OrgEdge" -SubnetMask 255.255.255.0 -Gateway 192.168.66.1 -IPRangeStart 192.168.66.100 -IPRangeEnd 192.168.66.200
 
     .PARAMETER Name
         Name of the New Org Network as String
@@ -104,12 +104,11 @@ Function New-MyOrgNetwork {
 
         $OrgNetwork.configuration = new-object vmware.vimautomation.cloud.views.networkconfiguration
         $OrgNetwork.configuration.fencemode = "natRouted"
-
         $OrgNetwork.configuration.ipscopes = new-object vmware.vimautomation.cloud.views.ipscopes
+
         $Scope = new-object vmware.vimautomation.cloud.views.ipScope
         $Scope.gateway = $Gateway
         $Scope.netmask = $SubnetMask
-       #$Scope.dns1 = "192.168.2.1"
 
         $Scope.ipranges = new-object vmware.vimautomation.cloud.views.ipranges
         $Scope.ipranges.iprange = new-object vmware.vimautomation.cloud.views.iprange
