@@ -90,13 +90,20 @@ Function New-MyOrgNetwork {
             elseif ( $orgVdc.Count -lt 1) {
                 throw "No OrgVdc found!"
                 }
-
         $orgVdcView = $orgVdc| Get-CIView
 
         ## Get EdgeGateway
-        $edgeGateway = Search-Cloud -QueryType EdgeGateway -Name $EdgeName | Get-CIView
+        Write-Verbose "Get EdgeGateway"
+        [Array] $edgeGateway = Search-Cloud -QueryType EdgeGateway -Name $EdgeName | Get-CIView
+        if ( $edgeGateway.Count -gt 1) {
+            throw "Multiple EdgeGateways found!"
+            }
+            elseif ( $edgeGateway.Count -lt 1) {
+                throw "No EdgeGateway found!"
+                }
 
         ## Define Org Network
+        Write-Verbose "Define Org Network"
         $OrgNetwork = new-object vmware.vimautomation.cloud.views.orgvdcnetwork
         $OrgNetwork.name = $Name
         $OrgNetwork.edgegateway = $edgeGateway.id
@@ -118,6 +125,7 @@ Function New-MyOrgNetwork {
         $OrgNetwork.configuration.ipscopes.ipscope += $Scope
 
         ## Create Org Network
+        Write-Verbose "Create Org Network"
         $CreateOrgNetwork = $orgVdcView.CreateNetwork($OrgNetwork)
 
         ## Wait for Org Network to become Ready
