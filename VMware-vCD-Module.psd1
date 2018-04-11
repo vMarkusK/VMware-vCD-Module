@@ -12,7 +12,7 @@
 # RootModule = ''
 
 # Die Versionsnummer dieses Moduls
-ModuleVersion = '1.2.2'
+ModuleVersion = '1.2.3'
 
 # ID zur eindeutigen Kennzeichnung dieses Moduls
 GUID = '1ef8a2de-ca22-4c88-8cdb-e00f35007d2a'
@@ -98,7 +98,7 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        Tags = @('VMware', 'vCloud', 'PowerCLI')
+        Tags = @('VMware', 'vCloud', 'PowerCLI', 'vCloudDirector', 'Automation', 'EdgeGateway', 'OrgNetwork')
 
         # A URL to the license for this module.
         LicenseUri = 'https://github.com/mycloudrevolution/VMware-vCD-Module/blob/master/LICENSE'
@@ -113,7 +113,7 @@ PrivateData = @{
         # ReleaseNotes = ''
 
         # External dependent modules of this module
-        ExternalModuleDependencies = 'VMware.PowerCLI'
+        ExternalModuleDependencies = 'VMware.VimAutomation.Cloud'
 
     } # End of PSData hashtable
 

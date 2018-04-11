@@ -153,7 +153,7 @@ Task PublishImpl -depends Test -requiredVariables EncryptedApiKeyPath, PublishDi
     }
 
     "Calling Publish-Module..."
-    Publish-Module @publishParams -WhatIf
+    Publish-Module @publishParams
 }
 
 Task Test -depends Build {
