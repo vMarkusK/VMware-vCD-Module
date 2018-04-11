@@ -223,7 +223,7 @@ SYNOPSIS
     
 SYNTAX
     New-MyOrgNetwork [-Name] <String> [-OrgVdcName] <String> [-OrgName] <String> [-EdgeName] <String> [-SubnetMask] <IPAddress> [-Gateway] <IPAddress> [-IPRangeStart] 
-    <IPAddress> [-IPRangeEnd] <IPAddress> [[-Timeout] <Int32>] [<CommonParameters>]
+    <IPAddress> [-IPRangeEnd] <IPAddress> [[-Shared] <Boolean>] [[-Timeout] <Int32>] [<CommonParameters>]
     
     
 DESCRIPTION
@@ -254,6 +254,11 @@ PARAMETERS
     -IPRangeEnd <IPAddress>
         IP Range End of the New Org Network as IP Address
         
+    -Shared <Boolean>
+        Switch for Shared OrgVDC Network
+        
+        Default: $True
+        
     -Timeout <Int32>
         Timeout for the Org Network to become Ready
         
@@ -271,6 +276,33 @@ PARAMETERS
     192.168.66.100 -IPRangeEnd 192.168.66.200
     
     
+    
+    
+    
+    
+    -------------------------- EXAMPLE 2 --------------------------
+    
+    PS C:\>New-MyOrgNetwork -Name Test -OrgVdcName "Test-OrgVDC" -OrgName "Test-Org" -EdgeName "Test-OrgEdge" -SubnetMask 255.255.255.0 -Gateway 192.168.66.1 -IPRangeStart 
+    192.168.66.100 -IPRangeEnd 192.168.66.200 -Shared:$False
+    
+    
+    
+    
+    
+    
+    -------------------------- EXAMPLE 3 --------------------------
+    
+    PS C:\>$params = @{ 'Name' = 'Test';
+    
+    'OrgVdcName'= 'Test-OrgVDC';
+                'OrgName'='Test-Org';
+                'EdgeName'='Test-OrgEdge';
+                'SubnetMask' = '255.255.255.0';
+                'Gateway' = '192.168.66.1';
+                'IPRangeStart' = '192.168.66.100';
+                'IPRangeEnd' = '192.168.66.200'
+                }
+    New-MyOrgNetwork @params -Verbose
     
     
     
