@@ -40,7 +40,8 @@
             "isTestCommand": true,
             "showOutput": "always",
             "args": [
-                "Write-Host 'Invoking CreateDocs'; ./helper/*.Create-Docs.ps1;",
+                "Write-Host 'Invoking CreateDocs'; Get-Module -Name VMware* | Import-Module -Force;",
+                "[Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US'; ./helper/*.Create-Docs.ps1;",
                 "Invoke-Command { Write-Host 'Completed CreateDocs task in task runner.' }"
             ]
         },

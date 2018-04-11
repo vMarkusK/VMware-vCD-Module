@@ -79,7 +79,7 @@ PARAMETERS
     
     -------------------------- EXAMPLE 1 --------------------------
     
-    C:\PS>Invoke-MyOnBoarding -ConfigFile ".\OnBoarding.json" -Enabled:$true
+    PS C:\>Invoke-MyOnBoarding -ConfigFile ".\OnBoarding.json" -Enabled:$true
     
     
     
@@ -88,7 +88,7 @@ PARAMETERS
     
     -------------------------- EXAMPLE 2 --------------------------
     
-    C:\PS>Invoke-MyOnBoarding -ConfigFile ".\OnBoarding.json" -Enabled:$false
+    PS C:\>Invoke-MyOnBoarding -ConfigFile ".\OnBoarding.json" -Enabled:$false
     
     
     
