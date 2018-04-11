@@ -85,7 +85,8 @@
             "group": {
                 "kind": "build",
                 "isDefault": true
-            }
+            },
+            "problemMatcher": []
         },
         {
             "label": "Test",
@@ -102,7 +103,8 @@
         {
             "label": "Publish",
             "type": "shell",
-            "command": "Invoke-PSake build.ps1 -taskList Publish"
+            "command": "Invoke-PSake build.ps1 -taskList Publish",
+            "problemMatcher": []
         }
     ]
 }

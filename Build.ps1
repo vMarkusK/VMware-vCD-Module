@@ -69,7 +69,7 @@ Properties {
                    Foreach-Object {$null = Test-ModuleManifest -Path $_ -ErrorAction SilentlyContinue; if ($?) {$_}})[0].BaseName
 
     # Path to the release notes file.  Set to $null if the release notes reside in the manifest file.
-    $ReleaseNotesPath = "$PSScriptRoot\ReleaseNotes.md"
+    $ReleaseNotesPath = $null
 
     # The directory used to publish the module from.  If you are using Git, the
     # $PublishRootDir should be ignored if it is under the workspace directory.
@@ -81,6 +81,10 @@ Properties {
     $Exclude = @(
         (Split-Path $PSCommandPath -Leaf),
         'Release',
+        'docs',
+        'examples',
+        'helper',
+        'media',
         'Tests',
         '.git*',
         '.vscode',

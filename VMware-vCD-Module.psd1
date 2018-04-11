@@ -18,7 +18,7 @@ ModuleVersion = '1.2.0'
 GUID = '1ef8a2de-ca22-4c88-8cdb-e00f35007d2a'
 
 # Autor dieses Moduls
-Author = 'Markus'
+Author = 'Markus Kraus'
 
 # Unternehmen oder Hersteller dieses Moduls
 CompanyName = 'mycloudrevolution.com'
@@ -27,7 +27,7 @@ CompanyName = 'mycloudrevolution.com'
 Copyright = '(c) 2017 Markus. Alle Rechte vorbehalten.'
 
 # Beschreibung der von diesem Modul bereitgestellten Funktionen
-# Description = ''
+Description = 'This a POwerShell Module based on VMware PowerCLI vCloud Director Module to extend its function'
 
 # Die f�r dieses Modul mindestens erforderliche Version des Windows PowerShell-Moduls
 # PowerShellVersion = ''
@@ -98,7 +98,7 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        # Tags = @()
+        Tags = @('VMware', 'vCloud', 'PowerCLI')
 
         # A URL to the license for this module.
         # LicenseUri = ''
@@ -113,7 +113,7 @@ PrivateData = @{
         # ReleaseNotes = ''
 
         # External dependent modules of this module
-        # ExternalModuleDependencies = ''
+        ExternalModuleDependencies = 'VMware.PowerCLI'
 
     } # End of PSData hashtable
 
