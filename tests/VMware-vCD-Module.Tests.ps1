@@ -20,7 +20,7 @@ Describe "General project validation: $moduleName" {
     }
 
     It "Module '$moduleName' can import cleanly" {
-        {Get-Module VMware* | Import-Module -Force} | Should Not Throw
+        {Import-Module VMware.VimAutomation.Cloud -Force} | Should Not Throw
         {Import-Module (Join-Path $moduleRoot "$moduleName.psd1") -Force } | Should Not Throw
         $Error
     }
