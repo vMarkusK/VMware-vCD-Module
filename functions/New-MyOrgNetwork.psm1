@@ -8,7 +8,7 @@
     .NOTES
         File Name  : New-MyOrgNetwork.ps1
         Author     : Markus Kraus
-        Version    : 1.0
+        Version    : 1.1
         State      : Ready
 
     .LINK
@@ -16,6 +16,21 @@
 
     .EXAMPLE
         New-MyOrgNetwork -Name Test -OrgVdcName "Test-OrgVDC" -OrgName "Test-Org" -EdgeName "Test-OrgEdge" -SubnetMask 255.255.255.0 -Gateway 192.168.66.1 -IPRangeStart 192.168.66.100 -IPRangeEnd 192.168.66.200
+
+    .EXAMPLE
+        New-MyOrgNetwork -Name Test -OrgVdcName "Test-OrgVDC" -OrgName "Test-Org" -EdgeName "Test-OrgEdge" -SubnetMask 255.255.255.0 -Gateway 192.168.66.1 -IPRangeStart 192.168.66.100 -IPRangeEnd 192.168.66.200 -Shared:$False
+
+    .EXAMPLE
+        $params = @{ 'Name' = 'Test';
+                    'OrgVdcName'= 'Test-OrgVDC';
+                    'OrgName'='Test-Org';
+                    'EdgeName'='Test-OrgEdge';
+                    'SubnetMask' = '255.255.255.0';
+                    'Gateway' = '192.168.66.1';
+                    'IPRangeStart' = '192.168.66.100';
+                    'IPRangeEnd' = '192.168.66.200'
+                    }
+        New-MyOrgNetwork @params -Verbose
 
     .PARAMETER Name
         Name of the New Org Network as String
@@ -40,6 +55,11 @@
 
     .PARAMETER IPRangeEnd
          IP Range End of the New Org Network as IP Address
+
+    .PARAMETER Shared
+         Switch for Shared OrgVDC Network
+
+         Default: $True
 
     .PARAMETER Timeout
         Timeout for the Org Network to become Ready
@@ -72,6 +92,9 @@
             [Parameter(Mandatory=$True, ValueFromPipeline=$False, HelpMessage="IP Range End the New Org Network as IP Address")]
             [ValidateNotNullorEmpty()]
                 [IPAddress] $IPRangeEnd,
+            [Parameter(Mandatory=$False, ValueFromPipeline=$False, HelpMessage="Switch for Shared OrgVDC Network")]
+            [ValidateNotNullorEmpty()]
+                [Bool] $Shared = $True,
             [Parameter(Mandatory=$False, ValueFromPipeline=$False,HelpMessage="Timeout for the Org Network to become Ready")]
             [ValidateNotNullorEmpty()]
                 [int] $Timeout = 120
@@ -105,7 +128,7 @@
         $OrgNetwork = new-object vmware.vimautomation.cloud.views.orgvdcnetwork
         $OrgNetwork.name = $Name
         $OrgNetwork.edgegateway = $edgeGateway.id
-        $OrgNetwork.isshared = "True"
+        $OrgNetwork.isshared = $Shared
 
         $OrgNetwork.configuration = new-object vmware.vimautomation.cloud.views.networkconfiguration
         $OrgNetwork.configuration.fencemode = "natRouted"
@@ -137,7 +160,7 @@
         Write-Progress -Activity "Creating Org Network" -Completed
         Start-Sleep 1
 
-        Get-OrgVdcNetwork -Id $CreateOrgNetwork.Id | Select-Object Name, OrgVdc, NetworkType, DefaultGateway, Netmask, StaticIPPool | Format-Table -AutoSize
+        Get-OrgVdcNetwork -Id $CreateOrgNetwork.Id | Select-Object Name, OrgVdc, NetworkType, DefaultGateway, Netmask, StaticIPPool, @{ N='isShared'; E = {$_.ExtensionData.isShared} } | Format-Table -AutoSize
 
         }
     }
