@@ -19,12 +19,10 @@ Describe "General project validation: $moduleName" {
         $errors.Count | Should Be 0
     }
 
-    It "Module '$moduleName' prerequirements are met" {
-        {Import-Module VMware.VimAutomation.Cloud -Force} | Should Not Throw
-    }
-
     It "Module '$moduleName' can import cleanly" {
-        {Import-Module (Join-Path $moduleRoot "$moduleName.psd1") -force } | Should Not Throw
+        {Import-Module VMware.VimAutomation.Cloud -Force} | Should Not Throw
+        {Import-Module (Join-Path $moduleRoot "$moduleName.psd1") -Force } | Should Not Throw
+        $Error
     }
 
     It "Module '$moduleName' JSON example is valid" {

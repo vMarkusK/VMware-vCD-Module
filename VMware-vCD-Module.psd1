@@ -12,13 +12,13 @@
 # RootModule = ''
 
 # Die Versionsnummer dieses Moduls
-ModuleVersion = '1.1.0'
+ModuleVersion = '1.2.2'
 
 # ID zur eindeutigen Kennzeichnung dieses Moduls
 GUID = '1ef8a2de-ca22-4c88-8cdb-e00f35007d2a'
 
 # Autor dieses Moduls
-Author = 'Markus'
+Author = 'Markus Kraus'
 
 # Unternehmen oder Hersteller dieses Moduls
 CompanyName = 'mycloudrevolution.com'
@@ -27,7 +27,7 @@ CompanyName = 'mycloudrevolution.com'
 Copyright = '(c) 2017 Markus. Alle Rechte vorbehalten.'
 
 # Beschreibung der von diesem Modul bereitgestellten Funktionen
-# Description = ''
+Description = 'This a POwerShell Module based on VMware PowerCLI vCloud Director Module to extend its function'
 
 # Die f�r dieses Modul mindestens erforderliche Version des Windows PowerShell-Moduls
 # PowerShellVersion = ''
@@ -48,7 +48,7 @@ Copyright = '(c) 2017 Markus. Alle Rechte vorbehalten.'
 # ProcessorArchitecture = ''
 
 # Die Module, die vor dem Importieren dieses Moduls in die globale Umgebung geladen werden m�ssen
-# RequiredModules = @()
+RequiredModules = @('VMware.VimAutomation.Cloud')
 
 # Die Assemblys, die vor dem Importieren dieses Moduls geladen werden m�ssen
 # RequiredAssemblies = @()
@@ -98,13 +98,13 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        # Tags = @()
+        Tags = @('VMware', 'vCloud', 'PowerCLI')
 
         # A URL to the license for this module.
-        # LicenseUri = ''
+        LicenseUri = 'https://github.com/mycloudrevolution/VMware-vCD-Module/blob/master/LICENSE'
 
         # A URL to the main website for this project.
-        # ProjectUri = ''
+        ProjectUri = 'https://github.com/mycloudrevolution/VMware-vCD-Module'
 
         # A URL to an icon representing this module.
         # IconUri = ''
@@ -113,7 +113,7 @@ PrivateData = @{
         # ReleaseNotes = ''
 
         # External dependent modules of this module
-        # ExternalModuleDependencies = ''
+        ExternalModuleDependencies = 'VMware.PowerCLI'
 
     } # End of PSData hashtable
 

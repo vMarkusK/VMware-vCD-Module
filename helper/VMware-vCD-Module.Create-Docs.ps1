@@ -1,3 +1,4 @@
+Get-Module VMware* | Import-Module -Force
 $moduleRoot = Resolve-Path "$PSScriptRoot\.."
 Import-Module (Join-Path $moduleRoot "VMware-vCD-Module.psd1") -force
 
