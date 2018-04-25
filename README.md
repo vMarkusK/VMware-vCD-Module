@@ -31,11 +31,11 @@ All Functions in this Module can be used as standalone Cmdlet but also the ``Inv
 
 ### Fully tested Versions:
 
-Powershell: v4, v5
+Powershell: v4, v5, v5.1
 
-PowerCLI: 6.5.1
+PowerCLI: 6.5.1, 6.5.4
 
-VMware vCloud Director: 8.10.1
+VMware vCloud Director: 8.20.1, 9.1
 
 ### Individual functions of the Module
 
@@ -51,17 +51,18 @@ New-MyOrgAdmin -Name "OrgAdmin" -Pasword "Anfang!!" -FullName "Org Admin" -Email
 
 #### New-MyOrgVdc
  ```PowerShell
-New-MyOrgVdc -Name "TestVdc" -CPULimit 1000 -MEMLimit 1024 -StorageLimit 1024 -StorageProfile "Standard-DC01" -NetworkPool "NetworkPool-DC01" -ProviderVDC "Provider-VDC-DC01" -Org "TestOrg"
+New-MyOrgVdc -Name "TestVdc" -AllocationModel AllocationVApp -StorageLimit 1000 -StorageProfile "Standard-DC01" -NetworkPool "NetworkPool-DC01" -ProviderVDC "Provider-VDC-DC01" -Org "TestOrg"
+
 ```
 
 #### New-MyEdgeGateway
  ```PowerShell
-New-MyEdgeGateway -Name "TestEdge" -OrgVDCName "TestVDC" -OrgName "TestOrg" -ExternalNetwork "ExternalNetwork" -IPAddress "192.168.100.1" -SubnetMask "255.255.255.0" -Gateway "192.168.100.254" -IPRangeStart "192.168.100.2" -IPRangeEnd "192.168.100.3" -Verbose
+New-MyEdgeGateway -Name "TestEdge" -OrgVDCName "TestVDC" -OrgName "TestOrg" -Size "full" -ExternalNetwork "ExternalNetwork" -IPAddress "192.168.100.1" -SubnetMask "255.255.255.0" -Gateway "192.168.100.254" -IPRangeStart "192.168.100.2" -IPRangeEnd "192.168.100.3" -Verbose
 ```
 
 #### New-MyOrgNetwork
  ```PowerShell
-New-MyOrgNetwork -Name Test -OrgVdcName "Test-OrgVDC" -OrgName "Test-Org" -EdgeName "Test-OrgEdge" -SubnetMask 255.255.255.0 -Gateway 192.168.66.1 -IPRangeStart 192.168.66.100 -IPRangeEnd 192.168.66.200
+New-MyOrgNetwork -Name Test -OrgVdcName "Test-OrgVDC" -OrgName "Test-Org" -EdgeName "Test-OrgEdge" -SubnetMask 255.255.255.0 -Gateway 192.168.66.1 -IPRangeStart 192.168.66.100 -IPRangeEnd 192.168.66.200 -Shared:$false
 ```
 ![New-MyOrgNetwork](/media/New-MyOrgNetwork.png)
 
