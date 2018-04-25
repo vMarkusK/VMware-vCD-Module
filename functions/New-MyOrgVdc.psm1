@@ -7,7 +7,6 @@
     Creates a new vCD Org VDC with Default Parameters
 
     Default Parameters are:
-    * Allocation Model
     * Network Quota
     * VM Quota
     * 'vCpu In Mhz'
@@ -18,7 +17,7 @@
 .NOTES
     File Name  : New-MyOrgVdc.ps1
     Author     : Markus Kraus
-    Version    : 1.2
+    Version    : 1.3
     State      : Ready
 
 .LINK
@@ -33,11 +32,22 @@
 .PARAMETER Name
     Name of the New Org VDC as String
 
+.PARAMETER AllocationModel
+    Allocation Model of the New Org VDC as String
+
 .PARAMETER CPULimit
     CPU Limit (MHz) of the New Org VDC as String
 
+    Default: 0 (Unlimited)
+
+    Note: If AllocationModel is not AllocationVApp (Pay as you go), a limit needs to be set
+
 .PARAMETER MEMLimit
     Memory Limit (MB) of the New Org VDC as String
+
+    Default: 0 (Unlimited)
+
+    Note: If AllocationModel is not AllocationVApp (Pay as you go), a limit needs to be set
 
 .PARAMETER StorageLimit
     Storage Limit (MB) of the New Org VDC as String
@@ -74,12 +84,16 @@
         [Parameter(Mandatory=$True, ValueFromPipeline=$False, HelpMessage="Name of the New Org VDC as String")]
         [ValidateNotNullorEmpty()]
             [String] $Name,
-        [Parameter(Mandatory=$True, ValueFromPipeline=$False, HelpMessage="CPU Limit (MHz) of the New Org VDC as String")]
+        [Parameter(Mandatory=$True, ValueFromPipeline=$False, HelpMessage="Allocation Model of the New Org VDC as String")]
         [ValidateNotNullorEmpty()]
-            [int] $CPULimit,
-        [Parameter(Mandatory=$True, ValueFromPipeline=$False, HelpMessage="Memory Limit (MB) of the New Org VDC as String")]
+        [ValidateSet("AllocationPool","AllocationVApp")]
+            [String] $AllocationModel,
+        [Parameter(Mandatory=$False, ValueFromPipeline=$False, HelpMessage="CPU Limit (MHz) of the New Org VDC as String")]
         [ValidateNotNullorEmpty()]
-            [int] $MEMLimit,
+            [int] $CPULimit = 0,
+        [Parameter(Mandatory=$False, ValueFromPipeline=$False, HelpMessage="Memory Limit (MB) of the New Org VDC as String")]
+        [ValidateNotNullorEmpty()]
+            [int] $MEMLimit = 0,
         [Parameter(Mandatory=$True, ValueFromPipeline=$False, HelpMessage="Storage Limit (MB) of the New Org VDC as String")]
         [ValidateNotNullorEmpty()]
             [int] $StorageLimit,
@@ -115,7 +129,7 @@
         $providerVdcRef = New-Object VMware.VimAutomation.Cloud.Views.Reference
         $providerVdcRef.Href = $OrgVdcproviderVdc.Href
         $adminVdc.ProviderVdcReference = $providerVdcRef
-        $adminVdc.AllocationModel = "AllocationPool"
+        $adminVdc.AllocationModel = $AllocationModel
         $adminVdc.ComputeCapacity = New-Object VMware.VimAutomation.Cloud.Views.ComputeCapacity
         $adminVdc.ComputeCapacity.Cpu = New-Object VMware.VimAutomation.Cloud.Views.CapacityWithUsage
         $adminVdc.ComputeCapacity.Cpu.Units = "MHz"
@@ -130,8 +144,8 @@
         $adminVdc.StorageCapacity.Limit = $StorageLimit
         $adminVdc.NetworkQuota = 10
         $adminVdc.VmQuota = 0
-        $adminVdc.VCpuInMhz = 1000
-        $adminVdc.VCpuInMhz2 = 1000
+        $adminVdc.VCpuInMhz = 2000
+        $adminVdc.VCpuInMhz2 = 2000
         $adminVdc.UsesFastProvisioning = $false
         $adminVdc.IsThinProvision = $true
 
@@ -141,15 +155,15 @@
         $orgVdc = $orgED.CreateVdc($adminVdc)
 
         ## Wait for getting Ready
-        Write-Verbose "Wait for getting Ready"
+        Write-Verbose "Wait for OrgVdc getting Ready after creation"
         $i = 0
         while(($orgVdc = Get-OrgVdc -Name $Name -Verbose:$false).Status -eq "NotReady"){
             $i++
             Start-Sleep 2
-            if($i -gt $Timeout) { Write-Error "Creating Org Failed."; break}
-            Write-Progress -Activity "Creating Org" -Status "Wait for Org to become Ready..."
+            if($i -gt $Timeout) { Write-Error "Creating OrgVdc Failed."; break}
+            Write-Progress -Activity "Creating OrgVdc" -Status "Wait for OrgVdc to become Ready..."
             }
-        Write-Progress -Activity "Creating Org" -Completed
+        Write-Progress -Activity "Creating OrgVdc" -Completed
         Start-Sleep 2
 
         ## Search given Storage Profile
@@ -172,14 +186,14 @@
         $orgVdc.ExtensionData.CreateVdcStorageProfile($UpdateParams)
 
         ## Wait for getting Ready
-        Write-Verbose "Wait for getting Ready"
+        Write-Verbose "Wait for OrgVdc getting Ready after update"
         while(($orgVdc = Get-OrgVdc -Name $name -Verbose:$false).Status -eq "NotReady"){
             $i++
             Start-Sleep 1
-            if($i -gt $Timeout) { Write-Error "Update Org Failed."; break}
-            Write-Progress -Activity "Updating Org" -Status "Wait for Org to become Ready..."
+            if($i -gt $Timeout) { Write-Error "Update OrgVdc Failed."; break}
+            Write-Progress -Activity "Updating OrgVdc" -Status "Wait for OrgVdc to become Ready..."
             }
-        Write-Progress -Activity "Updating Org" -Completed
+        Write-Progress -Activity "Updating OrgVdc" -Completed
         Start-Sleep 1
 
         ## Search Any-StorageProfile

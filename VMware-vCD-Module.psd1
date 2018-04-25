@@ -12,7 +12,7 @@
 # RootModule = ''
 
 # Die Versionsnummer dieses Moduls
-ModuleVersion = '1.2.3'
+ModuleVersion = '1.3.0'
 
 # ID zur eindeutigen Kennzeichnung dieses Moduls
 GUID = '1ef8a2de-ca22-4c88-8cdb-e00f35007d2a'
@@ -107,7 +107,7 @@ PrivateData = @{
         ProjectUri = 'https://github.com/mycloudrevolution/VMware-vCD-Module'
 
         # A URL to an icon representing this module.
-        # IconUri = ''
+        IconUri = 'https://github.com/mycloudrevolution/VMware-vCD-Module/blob/master/media/vCD_Small.png'
 
         # ReleaseNotes of this module
         # ReleaseNotes = ''
