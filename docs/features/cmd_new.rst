@@ -15,15 +15,15 @@ SYNOPSIS
     
     
 SYNTAX
-    New-MyEdgeGateway [-Name] <String> [-OrgVdcName] <String> [-OrgName] <String> [-ExternalNetwork] <String> [-IPAddress] <IPAddress> [-SubnetMask] <IPAddress> [-Gateway] 
-    <IPAddress> [-IPRangeStart] <IPAddress> [-IPRangeEnd] <IPAddress> [[-Timeout] <Int32>] [<CommonParameters>]
+    New-MyEdgeGateway [-Name] <String> [-OrgVdcName] <String> [-OrgName] <String> [-Size] <String> [-ExternalNetwork] <String> 
+    [-IPAddress] <IPAddress> [-SubnetMask] <IPAddress> [-Gateway] <IPAddress> [-IPRangeStart] <IPAddress> [-IPRangeEnd] <IPAddress> 
+    [[-Timeout] <Int32>] [<CommonParameters>]
     
     
 DESCRIPTION
     Creates a new Edge Gateway with Default Parameters
     
     Default Parameters are:
-    * Size
     * HA State
     * DNS Relay
     
@@ -37,6 +37,9 @@ PARAMETERS
         
     -OrgName <String>
         Org where the new Edge Gateway should be created as string
+        
+    -Size <String>
+        Size of the new Edge Gateway as string
         
     -ExternalNetwork <String>
         External Network of the new Edge Gateway as String
@@ -69,8 +72,9 @@ PARAMETERS
     
     -------------------------- EXAMPLE 1 --------------------------
     
-    PS C:\>New-MyEdgeGateway -Name "TestEdge" -OrgVDCName "TestVDC" -OrgName "TestOrg" -ExternalNetwork "ExternalNetwork" -IPAddress "192.168.100.1" -SubnetMask 
-    "255.255.255.0" -Gateway "192.168.100.254" -IPRangeStart ""192.168.100.2" -IPRangeEnd ""192.168.100.3" -Verbose
+    PS C:\>New-MyEdgeGateway -Name "TestEdge" -OrgVDCName "TestVDC" -OrgName "TestOrg" -Size compact -ExternalNetwork "ExternalNetwork" 
+    -IPAddress "192.168.100.1" -SubnetMask "255.255.255.0" -Gateway "192.168.100.254" -IPRangeStart ""192.168.100.2" -IPRangeEnd 
+    ""192.168.100.3" -Verbose
     
     
     
@@ -159,7 +163,8 @@ SYNOPSIS
     
     
 SYNTAX
-    New-MyOrgAdmin [-Name] <String> [-Pasword] <String> [-FullName] <String> [-EmailAddress] <String> [-Org] <String> [-Enabled] [<CommonParameters>]
+    New-MyOrgAdmin [-Name] <String> [-Pasword] <String> [-FullName] <String> [-EmailAddress] <String> [-Org] <String> [-Enabled] 
+    [<CommonParameters>]
     
     
 DESCRIPTION
@@ -222,8 +227,8 @@ SYNOPSIS
     
     
 SYNTAX
-    New-MyOrgNetwork [-Name] <String> [-OrgVdcName] <String> [-OrgName] <String> [-EdgeName] <String> [-SubnetMask] <IPAddress> [-Gateway] <IPAddress> [-IPRangeStart] 
-    <IPAddress> [-IPRangeEnd] <IPAddress> [[-Shared] <Boolean>] [[-Timeout] <Int32>] [<CommonParameters>]
+    New-MyOrgNetwork [-Name] <String> [-OrgVdcName] <String> [-OrgName] <String> [-EdgeName] <String> [-SubnetMask] <IPAddress> [-Gateway] 
+    <IPAddress> [-IPRangeStart] <IPAddress> [-IPRangeEnd] <IPAddress> [[-Shared] <Boolean>] [[-Timeout] <Int32>] [<CommonParameters>]
     
     
 DESCRIPTION
@@ -272,8 +277,8 @@ PARAMETERS
     
     -------------------------- EXAMPLE 1 --------------------------
     
-    PS C:\>New-MyOrgNetwork -Name Test -OrgVdcName "Test-OrgVDC" -OrgName "Test-Org" -EdgeName "Test-OrgEdge" -SubnetMask 255.255.255.0 -Gateway 192.168.66.1 -IPRangeStart 
-    192.168.66.100 -IPRangeEnd 192.168.66.200
+    PS C:\>New-MyOrgNetwork -Name Test -OrgVdcName "Test-OrgVDC" -OrgName "Test-Org" -EdgeName "Test-OrgEdge" -SubnetMask 255.255.255.0 
+    -Gateway 192.168.66.1 -IPRangeStart 192.168.66.100 -IPRangeEnd 192.168.66.200
     
     
     
@@ -282,8 +287,8 @@ PARAMETERS
     
     -------------------------- EXAMPLE 2 --------------------------
     
-    PS C:\>New-MyOrgNetwork -Name Test -OrgVdcName "Test-OrgVDC" -OrgName "Test-Org" -EdgeName "Test-OrgEdge" -SubnetMask 255.255.255.0 -Gateway 192.168.66.1 -IPRangeStart 
-    192.168.66.100 -IPRangeEnd 192.168.66.200 -Shared:$False
+    PS C:\>New-MyOrgNetwork -Name Test -OrgVdcName "Test-OrgVDC" -OrgName "Test-Org" -EdgeName "Test-OrgEdge" -SubnetMask 255.255.255.0 
+    -Gateway 192.168.66.1 -IPRangeStart 192.168.66.100 -IPRangeEnd 192.168.66.200 -Shared:$False
     
     
     
@@ -325,15 +330,15 @@ SYNOPSIS
     
     
 SYNTAX
-    New-MyOrgVdc [-Name] <String> [-CPULimit] <Int32> [-MEMLimit] <Int32> [-StorageLimit] <Int32> [-StorageProfile] <String> [-NetworkPool] <String> [[-ExternalNetwork] 
-    <String>] [-Enabled] [-ProviderVDC] <String> [-Org] <String> [[-Timeout] <Int32>] [<CommonParameters>]
+    New-MyOrgVdc [-Name] <String> [-AllocationModel] <String> [[-CPULimit] <Int32>] [[-MEMLimit] <Int32>] [-StorageLimit] <Int32> 
+    [-StorageProfile] <String> [-NetworkPool] <String> [[-ExternalNetwork] <String>] [-Enabled] [-ProviderVDC] <String> [-Org] <String> 
+    [[-Timeout] <Int32>] [<CommonParameters>]
     
     
 DESCRIPTION
     Creates a new vCD Org VDC with Default Parameters
     
     Default Parameters are:
-    * Allocation Model
     * Network Quota
     * VM Quota
     * 'vCpu In Mhz'
@@ -346,11 +351,22 @@ PARAMETERS
     -Name <String>
         Name of the New Org VDC as String
         
+    -AllocationModel <String>
+        Allocation Model of the New Org VDC as String
+        
     -CPULimit <Int32>
         CPU Limit (MHz) of the New Org VDC as String
         
+        Default: 0 (Unlimited)
+        
+        Note: If AllocationModel is not AllocationVApp (Pay as you go), a limit needs to be set
+        
     -MEMLimit <Int32>
         Memory Limit (MB) of the New Org VDC as String
+        
+        Default: 0 (Unlimited)
+        
+        Note: If AllocationModel is not AllocationVApp (Pay as you go), a limit needs to be set
         
     -StorageLimit <Int32>
         Storage Limit (MB) of the New Org VDC as String
@@ -390,8 +406,8 @@ PARAMETERS
     
     -------------------------- EXAMPLE 1 --------------------------
     
-    PS C:\>New-MyOrgVdc -Name "TestVdc" -CPULimit 1000 -MEMLimit 1000 -StorageLimit 1000 -StorageProfile "Standard-DC01" -NetworkPool "NetworkPool-DC01" -ProviderVDC 
-    "Provider-VDC-DC01" -Org "TestOrg" -ExternalNetwork "External_OrgVdcNet"
+    PS C:\>New-MyOrgVdc -Name "TestVdc" -AllocationModel AllocationPool -CPULimit 1000 -MEMLimit 1000 -StorageLimit 1000 -StorageProfile 
+    "Standard-DC01" -NetworkPool "NetworkPool-DC01" -ProviderVDC "Provider-VDC-DC01" -Org "TestOrg" -ExternalNetwork "External_OrgVdcNet"
     
     
     
@@ -400,8 +416,8 @@ PARAMETERS
     
     -------------------------- EXAMPLE 2 --------------------------
     
-    PS C:\>New-MyOrgVdc -Name "TestVdc" -CPULimit 1000 -MEMLimit 1000 -StorageLimit 1000 -StorageProfile "Standard-DC01" -NetworkPool "NetworkPool-DC01" -ProviderVDC 
-    "Provider-VDC-DC01" -Org "TestOrg"
+    PS C:\>New-MyOrgVdc -Name "TestVdc" -AllocationModel AllocationVApp -StorageLimit 1000 -StorageProfile "Standard-DC01" -NetworkPool 
+    "NetworkPool-DC01" -ProviderVDC "Provider-VDC-DC01" -Org "TestOrg"
     
     
     
