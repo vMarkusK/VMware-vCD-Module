@@ -7,7 +7,6 @@
     Creates a new Edge Gateway with Default Parameters
 
     Default Parameters are:
-    * Size
     * HA State
     * DNS Relay
 
