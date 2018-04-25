@@ -15,14 +15,14 @@
 .NOTES
     File Name  : New-MyEdgeGateway.ps1
     Author     : Markus Kraus
-    Version    : 1.0
+    Version    : 1.1
     State      : Ready
 
 .LINK
     https://mycloudrevolution.com/
 
 .EXAMPLE
-    New-MyEdgeGateway -Name "TestEdge" -OrgVDCName "TestVDC" -OrgName "TestOrg" -ExternalNetwork "ExternalNetwork" -IPAddress "192.168.100.1" -SubnetMask "255.255.255.0" -Gateway "192.168.100.254" -IPRangeStart ""192.168.100.2" -IPRangeEnd ""192.168.100.3" -Verbose
+    New-MyEdgeGateway -Name "TestEdge" -OrgVDCName "TestVDC" -OrgName "TestOrg" -Size compact -ExternalNetwork "ExternalNetwork" -IPAddress "192.168.100.1" -SubnetMask "255.255.255.0" -Gateway "192.168.100.254" -IPRangeStart ""192.168.100.2" -IPRangeEnd ""192.168.100.3" -Verbose
 
 .PARAMETER Name
     Name of the New Edge Gateway as String
@@ -32,6 +32,9 @@
 
 .PARAMETER OrgName
     Org where the new Edge Gateway should be created as string
+
+.PARAMETER Size
+    Size of the new Edge Gateway as string
 
 .PARAMETER ExternalNetwork
      External Network of the new Edge Gateway as String
@@ -67,6 +70,10 @@
         [Parameter(Mandatory=$True, ValueFromPipeline=$False, HelpMessage="Org where the new Edge Gateway should be created as string")]
         [ValidateNotNullorEmpty()]
             [String] $OrgName,
+        [Parameter(Mandatory=$True, ValueFromPipeline=$False, HelpMessage="Size of the new Edge Gateway as string")]
+        [ValidateNotNullorEmpty()]
+        [ValidateSet("compact","full")]
+            [String] $Size,
         [Parameter(Mandatory=$True, ValueFromPipeline=$False, HelpMessage="External Network of the New Edge Gateway as String")]
         [ValidateNotNullorEmpty()]
             [String] $ExternalNetwork,
@@ -111,7 +118,7 @@
     $EdgeGateway.Name = $Name
     $EdgeGateway.Configuration = New-Object VMware.VimAutomation.Cloud.Views.GatewayConfiguration
     #$EdgeGateway.Configuration.BackwardCompatibilityMode = $false
-    $EdgeGateway.Configuration.GatewayBackingConfig = "compact"
+    $EdgeGateway.Configuration.GatewayBackingConfig = $Size
     $EdgeGateway.Configuration.UseDefaultRouteForDnsRelay = $false
     $EdgeGateway.Configuration.HaEnabled = $false
 

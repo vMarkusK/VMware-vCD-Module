@@ -24,10 +24,10 @@
     https://mycloudrevolution.com/
 
 .EXAMPLE
-    New-MyOrgVdc -Name "TestVdc" -CPULimit 1000 -MEMLimit 1000 -StorageLimit 1000 -StorageProfile "Standard-DC01" -NetworkPool "NetworkPool-DC01" -ProviderVDC "Provider-VDC-DC01" -Org "TestOrg" -ExternalNetwork "External_OrgVdcNet"
+    New-MyOrgVdc -Name "TestVdc" -AllocationModel AllocationPool -CPULimit 1000 -MEMLimit 1000 -StorageLimit 1000 -StorageProfile "Standard-DC01" -NetworkPool "NetworkPool-DC01" -ProviderVDC "Provider-VDC-DC01" -Org "TestOrg" -ExternalNetwork "External_OrgVdcNet"
 
 .EXAMPLE
-    New-MyOrgVdc -Name "TestVdc" -CPULimit 1000 -MEMLimit 1000 -StorageLimit 1000 -StorageProfile "Standard-DC01" -NetworkPool "NetworkPool-DC01" -ProviderVDC "Provider-VDC-DC01" -Org "TestOrg"
+    New-MyOrgVdc -Name "TestVdc" -AllocationModel AllocationVApp -StorageLimit 1000 -StorageProfile "Standard-DC01" -NetworkPool "NetworkPool-DC01" -ProviderVDC "Provider-VDC-DC01" -Org "TestOrg"
 
 .PARAMETER Name
     Name of the New Org VDC as String
