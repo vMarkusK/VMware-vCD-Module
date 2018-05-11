@@ -18,10 +18,19 @@ MY CLOUD-(R)EVOLUTION [mycloudrevolution.com](http://mycloudrevolution.com/)
 
 [PowerCLI – Create vCloud Director Edge Gateway](https://mycloudrevolution.com/2017/06/27/powercli-create-vcloud-director-edge-gateway/)
 
+[PowerCLI – Create routed vCloud Director Org Network](https://mycloudrevolution.com/en/2018/04/18/powercli-create-routed-vcloud-director-org-network/)
 
 ## Project Documentation:
 
 [Read the Docs - VMware-vCD-Module](http://vmware-vcd-module.readthedocs.io/)
+
+## Project on PowerShell Gallery:
+
+[PowerShell Gallery - VMware-vCD-Module](https://www.powershellgallery.com/packages/VMware-vCD-Module)
+
+ ```PowerShell
+Install-Module -Name VMware-vCD-Module -Scope CurrentUser
+```
 
 ## Project Description:
 
