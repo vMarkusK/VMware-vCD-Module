@@ -66,4 +66,18 @@ New-MyOrgNetwork -Name Test -OrgVdcName "Test-OrgVDC" -OrgName "Test-Org" -EdgeN
 ```
 ![New-MyOrgNetwork](/media/New-MyOrgNetwork.png)
 
+#### New-MyExternalNetwork
+ ```PowerShell
+$params = @{ 'name' = 'MyTest';
+             'vCenterName'='MyVcenter';
+             'PortGroupName'='MyTest';
+             'SubnetMask' = '255.255.255.0';
+             'Gateway' = '192.168.110.1';
+             'IPRangeStart' = '192.168.110.100';
+             'IPRangeEnd' = '192.168.110.200'
+             }
+New-MyExternalNetwork @params
+```
+![New-MyExternalNetwork](/media/New-MyExternalNetwork.png)
+
 

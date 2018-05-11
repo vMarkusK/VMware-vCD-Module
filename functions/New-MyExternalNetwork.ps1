@@ -13,6 +13,15 @@
     https://mycloudrevolution.com/
 
 .EXAMPLE
+    $params = @{ 'name' = 'MyTest';
+             'vCenterName'='MyVcenter';
+             'PortGroupName'='MyTest';
+             'SubnetMask' = '255.255.255.0';
+             'Gateway' = '192.168.110.1';
+             'IPRangeStart' = '192.168.110.100';
+             'IPRangeEnd' = '192.168.110.200'
+             }
+    New-MyExternalNetwork @params
 
 .PARAMETER Name
     Name of the New Org Network as String
