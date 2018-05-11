@@ -12,7 +12,7 @@
 # RootModule = ''
 
 # Die Versionsnummer dieses Moduls
-ModuleVersion = '1.3.0'
+ModuleVersion = '1.4.0'
 
 # ID zur eindeutigen Kennzeichnung dieses Moduls
 GUID = '1ef8a2de-ca22-4c88-8cdb-e00f35007d2a'
@@ -68,11 +68,12 @@ NestedModules = @('functions\Invoke-MyOnBoarding.psm1',
                'functions\New-MyOrg.psm1',
                'functions\New-MyOrgAdmin.psm1',
                'functions\New-MyOrgVdc.psm1',
-               'functions\New-MyOrgNetwork.psm1'
+               'functions\New-MyOrgNetwork.psm1',
+               'functions\New-MyExternalNetwork.ps1'
                )
 
 # Aus diesem Modul zu exportierende Funktionen
-FunctionsToExport = 'Invoke-MyOnBoarding', 'New-MyEdgeGateway', 'New-MyOrg', 'New-MyOrgAdmin', 'New-MyOrgVdc', 'New-MyOrgNetwork'
+FunctionsToExport = 'Invoke-MyOnBoarding', 'New-MyEdgeGateway', 'New-MyOrg', 'New-MyOrgAdmin', 'New-MyOrgVdc', 'New-MyOrgNetwork', 'New-MyExternalNetwork'
 
 # Aus diesem Modul zu exportierende Cmdlets
 CmdletsToExport = '*'
