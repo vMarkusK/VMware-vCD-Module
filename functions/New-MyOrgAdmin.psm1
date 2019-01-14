@@ -12,7 +12,7 @@
 .NOTES
     File Name  : New-MyOrgAdmin.ps1
     Author     : Markus Kraus
-    Version    : 1.1
+    Version    : 1.2
     State      : Ready
 
 .LINK
@@ -78,7 +78,15 @@
         $vcloud = $DefaultCIServers[0].ExtensionData
 
         ## Find Role
-        $orgAdminRole = $vcloud.RoleReferences.RoleReference | Where-Object {$_.Name -eq "Organization Administrator"}
+        if ((Get-Module -Name VMware.VimAutomation.Cloud).Version.Major -eq "6") {
+            $vcloud = $global:DefaultCIServers[0].ExtensionData
+            $orgAdminRole = $vcloud.RoleReferences.RoleReference | Where-Object {$_.Name -eq "Organization Administrator"}
+
+        }
+        elseif ((Get-Module -Name VMware.VimAutomation.Cloud).Version.Major -ge "11") {
+            $orgAdminRole = $OrgED.RoleReferences.RoleReference | Where-Object {$_.Name -eq "Organization Administrator"}
+        }
+
         $orgAdminUser.Role = $orgAdminRole
 
         ## Create User
